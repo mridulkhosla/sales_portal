@@ -1,62 +1,732 @@
+
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sales Resource Intelligence</title>
+
 <style>
-:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f4f6fa}
-*{box-sizing:border-box}body{margin:0}.shell{max-width:1440px;margin:auto;padding:22px}
-.hero{background:#101d32;color:white;padding:24px 26px;border-radius:20px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
-.brand{display:flex;gap:14px;align-items:center}.logo{width:48px;height:48px;border-radius:14px;background:#30496e;display:grid;place-items:center;font-size:24px}.hero h1{font-size:24px;margin:0 0 5px}.hero p{margin:0;color:#b9c6da;font-size:13px}.demo{font-size:11px;letter-spacing:.08em;border:1px solid #bd8531;color:#ffd48b;padding:7px 10px;border-radius:30px}
-.nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.nav button,.btn{border:1px solid #d9deea;background:white;color:#35415a;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}.nav button.active,.btn.primary{background:#244c86;border-color:#244c86;color:white}.panel{display:none}.panel.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:20px 0 14px}.section-head h2{margin:0 0 5px;font-size:21px}.muted{color:#6e7890;font-size:13px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:white;border:1px solid #e4e8f0;border-radius:16px;padding:18px;box-shadow:0 2px 8px #16213b05}.metric-label{font-size:12px;color:#69758b}.metric{font-size:30px;font-weight:750;margin:7px 0}.metric-note{font-size:12px;color:#738097}.split{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-top:14px}.bar{display:flex;height:12px;border-radius:20px;overflow:hidden;background:#edf0f5;margin:18px 0 12px}.bar span{display:block}.legend{display:flex;gap:15px;flex-wrap:wrap;font-size:12px;color:#5f6b80}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}.callout{background:#f3f7ff;border:1px solid #dbe6fb;padding:14px;border-radius:12px;line-height:1.55;font-size:13px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.toolbar input,.toolbar select{border:1px solid #d9deea;border-radius:10px;background:white;padding:11px 12px;font:inherit}.toolbar input{flex:1;min-width:220px}.table-wrap{overflow:auto;background:white;border:1px solid #e4e8f0;border-radius:14px}table{border-collapse:collapse;width:100%;min-width:850px;font-size:13px}th,td{text-align:left;padding:13px 14px;border-bottom:1px solid #edf0f5;white-space:nowrap}th{background:#f9fafc;color:#69758b;font-size:11px;text-transform:uppercase;letter-spacing:.04em}tbody tr{cursor:pointer}tbody tr:hover{background:#f7f9fd}tbody tr.selected{background:#eef4ff}.pill{display:inline-block;border-radius:30px;padding:5px 8px;font-size:11px;font-weight:700}.Underutilized{background:#fff3d9;color:#895d0b}.Balanced{background:#def6eb;color:#176b4b}.Overutilized{background:#ffe4e4;color:#9d2c2c}.detail{margin-top:14px}.detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.mini{background:#f7f8fb;padding:12px;border-radius:10px}.mini small{display:block;color:#768198;margin-bottom:7px}.mini b{font-size:18px}.rec-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rec{background:white;border:1px solid #e4e8f0;border-radius:14px;padding:17px}.rec h3{font-size:15px;margin:10px 0}.rec p{font-size:13px;line-height:1.55;color:#526078}.rule{background:#f4f6fa;padding:10px;border-radius:9px;font-size:12px;margin-top:12px}.priority{font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:800}.Opportunity{color:#1a7855}.High{color:#b52f2f}.Review{color:#9b6b10}.Analysis{color:#315fa8}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{border:1px solid #e2e7f0;border-radius:12px;padding:14px;background:white}.step b{display:block;margin-bottom:7px}.step p{font-size:12px;color:#647087;line-height:1.5;margin:0}.weight{display:flex;align-items:center;gap:12px}.weight input{width:100%}.foot{font-size:12px;color:#788399;margin:18px 2px}.empty{padding:25px;text-align:center;color:#788399}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.split{grid-template-columns:1fr}.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.shell{padding:12px}.hero{padding:18px}.hero h1{font-size:20px}.grid{gap:8px}.card{padding:13px}.metric{font-size:25px}.rec-list{grid-template-columns:1fr}.steps{grid-template-columns:1fr}}
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f4f6fa;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+.shell { max-width: 1440px; margin: auto; padding: 22px; }
+
+.hero {
+  background: #101d32;
+  color: white;
+  padding: 24px 26px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; gap: 14px; align-items: center; }
+.logo {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: #30496e; display: grid; place-items: center;
+  font-size: 24px;
+}
+.hero h1 { font-size: 24px; margin: 0 0 5px; }
+.hero p { margin: 0; color: #b9c6da; font-size: 13px; }
+.demo {
+  font-size: 11px; letter-spacing: .08em;
+  border: 1px solid #bd8531; color: #ffd48b;
+  padding: 7px 10px; border-radius: 30px;
+}
+
+.nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
+.nav button, .btn {
+  border: 1px solid #d9deea; background: white; color: #35415a;
+  padding: 10px 14px; border-radius: 10px; cursor: pointer;
+  font-weight: 600;
+}
+.nav button.active, .btn.primary {
+  background: #244c86; border-color: #244c86; color: white;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.section-head {
+  display: flex; justify-content: space-between; align-items: end;
+  gap: 12px; flex-wrap: wrap; margin: 20px 0 14px;
+}
+.section-head h2 { margin: 0 0 5px; font-size: 21px; }
+.muted { color: #6e7890; font-size: 13px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: white; border: 1px solid #e4e8f0;
+  border-radius: 16px; padding: 18px;
+  box-shadow: 0 2px 8px #16213b05;
+}
+
+.metric-label { font-size: 12px; color: #69758b; }
+.metric { font-size: 30px; font-weight: 750; margin: 7px 0; }
+.metric-note { font-size: 12px; color: #738097; }
+
+.split {
+  display: grid; grid-template-columns: 1.25fr .75fr;
+  gap: 14px; margin-top: 14px;
+}
+
+.bar {
+  display: flex; height: 12px; border-radius: 20px;
+  overflow: hidden; background: #edf0f5; margin: 18px 0 12px;
+}
+.bar span { display: block; }
+.legend { display: flex; gap: 15px; flex-wrap: wrap; font-size: 12px; color: #5f6b80; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+.callout {
+  background: #f3f7ff; border: 1px solid #dbe6fb;
+  padding: 14px; border-radius: 12px; line-height: 1.55; font-size: 13px;
+}
+
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.toolbar input, .toolbar select {
+  border: 1px solid #d9deea; border-radius: 10px;
+  background: white; padding: 11px 12px; font: inherit;
+}
+.toolbar input { flex: 1; min-width: 220px; }
+
+.table-wrap { overflow: auto; background: white; border: 1px solid #e4e8f0; border-radius: 14px; }
+table { border-collapse: collapse; width: 100%; min-width: 850px; font-size: 13px; }
+th, td { text-align: left; padding: 13px 14px; border-bottom: 1px solid #edf0f5; white-space: nowrap; }
+th {
+  background: #f9fafc; color: #69758b; font-size: 11px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: #f7f9fd; }
+tbody tr.selected { background: #eef4ff; }
+
+.pill { display: inline-block; border-radius: 30px; padding: 5px 8px; font-size: 11px; font-weight: 700; }
+.Underutilized { background: #fff3d9; color: #895d0b; }
+.Balanced { background: #def6eb; color: #176b4b; }
+.Overutilized { background: #ffe4e4; color: #9d2c2c; }
+
+.detail { margin-top: 14px; }
+.detail-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.mini { background: #f7f8fb; padding: 12px; border-radius: 10px; }
+.mini small { display: block; color: #768198; margin-bottom: 7px; }
+.mini b { font-size: 18px; }
+
+.rec-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.rec { background: white; border: 1px solid #e4e8f0; border-radius: 14px; padding: 17px; }
+.rec h3 { font-size: 15px; margin: 10px 0; }
+.rec p { font-size: 13px; line-height: 1.55; color: #526078; }
+.rule { background: #f4f6fa; padding: 10px; border-radius: 9px; font-size: 12px; margin-top: 12px; }
+.priority { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; font-weight: 800; }
+.Opportunity { color: #1a7855; }
+.High { color: #b52f2f; }
+.Review { color: #9b6b10; }
+.Analysis { color: #315fa8; }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.step { border: 1px solid #e2e7f0; border-radius: 12px; padding: 14px; background: white; }
+.step b { display: block; margin-bottom: 7px; }
+.step p { font-size: 12px; color: #647087; line-height: 1.5; margin: 0; }
+
+.weight { display: flex; align-items: center; gap: 12px; }
+.weight input { width: 100%; }
+
+/* NEW: Top 3 Sales Performers */
+.top-performers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.performer-card {
+  background: white;
+  border: 1px solid #e4e8f0;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 2px 8px #16213b05;
+  min-width: 0;
+}
+
+.performer-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+
+.performer-rank {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: #eef3fb; color: #244c86;
+  display: grid; place-items: center;
+  font-size: 19px; font-weight: 800; flex-shrink: 0;
+}
+
+.performer-rank.first { background: #fff1cf; color: #946200; }
+
+.performer-name { font-size: 15px; font-weight: 750; overflow-wrap: anywhere; }
+.performer-client { font-size: 12px; color: #738097; margin-top: 4px; }
+
+.performer-score { font-size: 28px; font-weight: 800; margin: 10px 0 4px; }
+.performer-score-label { font-size: 12px; color: #69758b; }
+
+.performer-track {
+  height: 8px; background: #edf0f5; border-radius: 20px;
+  overflow: hidden; margin: 12px 0;
+}
+
+.performer-fill { height: 100%; background: #329b78; border-radius: 20px; }
+
+.performer-utilization {
+  display: flex; justify-content: space-between;
+  gap: 8px; font-size: 12px; color: #69758b;
+}
+
+.foot { font-size: 12px; color: #788399; margin: 18px 2px; }
+.empty { padding: 25px; text-align: center; color: #788399; }
+
+@media(max-width:900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .split { grid-template-columns: 1fr; }
+  .detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .top-performers { grid-template-columns: 1fr; }
+}
+
+@media(max-width:600px) {
+  .shell { padding: 12px; }
+  .hero { padding: 18px; }
+  .hero h1 { font-size: 20px; }
+  .grid { gap: 8px; }
+  .card { padding: 13px; }
+  .metric { font-size: 25px; }
+  .rec-list { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+}
 </style>
 </head>
-<body><main class="shell">
-<header class="hero"><div class="brand"><div class="logo">⌁</div><div><h1>Sales Resource Intelligence</h1><p>People · Performance · Capacity · AI recommendations</p></div></div><span class="demo">SYNTHETIC DEMO DATA</span></header>
-<nav class="nav"><button class="active" data-tab="overview">Overview</button><button data-tab="employees">Employees</button><button data-tab="planning">Resource Planning</button><button data-tab="agent">Agentic AI</button></nav>
+
+<body>
+<main class="shell">
+
+<header class="hero">
+  <div class="brand">
+    <div class="logo">⌁</div>
+    <div>
+      <h1>Sales Resource Intelligence</h1>
+      <p>People · Performance · Capacity · AI recommendations</p>
+    </div>
+  </div>
+  <span class="demo">SYNTHETIC DEMO DATA</span>
+</header>
+
+<nav class="nav">
+  <button class="active" data-tab="overview">Overview</button>
+  <button data-tab="employees">Employees</button>
+  <button data-tab="planning">Resource Planning</button>
+  <button data-tab="agent">Agentic AI</button>
+</nav>
+
+<!-- OVERVIEW -->
 <section id="overview" class="panel active">
-<div class="section-head"><div><h2>Management overview</h2><div class="muted">A workforce-level view across 100 sample sales employees.</div></div><button class="btn" onclick="loadAll()">↻ Refresh demo data</button></div>
-<div id="metrics" class="grid"></div>
-<div class="split"><div class="card"><h3>Workload distribution</h3><div id="distribution"></div><div class="muted">Planning thresholds: under 70% = underutilized; 70–100% = balanced; above 100% = overutilized.</div></div><div class="card"><h3>Agent planning summary</h3><p class="muted">The planning engine reviews capacity and performance together.</p><div class="callout" id="summaryText">Loading recommendation summary…</div><p><button class="btn primary" onclick="go('agent')">Review recommendations →</button></p></div></div>
+
+  <div class="section-head">
+    <div>
+      <h2>Management overview</h2>
+      <div class="muted">A workforce-level view across 100 sample sales employees.</div>
+    </div>
+    <button class="btn" onclick="loadAll()">↻ Refresh demo data</button>
+  </div>
+
+  <div id="metrics" class="grid"></div>
+
+  <!-- NEW: Top 3 Sales Performers -->
+  <div class="section-head">
+    <div>
+      <h2>Top 3 Sales Performers</h2>
+      <div class="muted">Highest performance scores across the sales team.</div>
+    </div>
+  </div>
+
+  <div id="topPerformers" class="top-performers">
+    <div class="card">Loading top performers...</div>
+  </div>
+
+  <div class="split">
+    <div class="card">
+      <h3>Workload distribution</h3>
+      <div id="distribution"></div>
+      <div class="muted">
+        Planning thresholds: under 70% = underutilized;
+        70–100% = balanced; above 100% = overutilized.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Agent planning summary</h3>
+      <p class="muted">The planning engine reviews capacity and performance together.</p>
+      <div class="callout" id="summaryText">Loading recommendation summary…</div>
+      <p><button class="btn primary" onclick="go('agent')">Review recommendations →</button></p>
+    </div>
+  </div>
 </section>
+
+<!-- EMPLOYEES -->
 <section id="employees" class="panel">
-<div class="section-head"><div><h2>Employee performance</h2><div class="muted">Search, filter and select a record to inspect its metrics.</div></div></div>
-<div class="toolbar"><input id="search" placeholder="Search employee, client or employee ID…"><select id="status"><option>All</option><option>Underutilized</option><option>Balanced</option><option>Overutilized</option></select></div>
-<div class="muted" id="matchCount" style="margin-bottom:10px"></div><div class="table-wrap"><table><thead><tr><th>Employee</th><th>Client</th><th>Salary / month</th><th>Client budget</th><th>Target attainment</th><th>Utilization</th><th>Score</th><th>Status</th></tr></thead><tbody id="employeeRows"></tbody></table></div>
-<div id="employeeDetail" class="card detail"><div class="muted">Select an employee to view details.</div></div>
+  <div class="section-head">
+    <div>
+      <h2>Employee performance</h2>
+      <div class="muted">Search, filter and select a record to inspect its metrics.</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input id="search" placeholder="Search employee, client or employee ID…">
+    <select id="status">
+      <option>All</option>
+      <option>Underutilized</option>
+      <option>Balanced</option>
+      <option>Overutilized</option>
+    </select>
+  </div>
+
+  <div class="muted" id="matchCount" style="margin-bottom:10px"></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Client</th>
+          <th>Salary / month</th>
+          <th>Client budget</th>
+          <th>Target attainment</th>
+          <th>Utilization</th>
+          <th>Score</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="employeeRows"></tbody>
+    </table>
+  </div>
+
+  <div id="employeeDetail" class="card detail">
+    <div class="muted">Select an employee to view details.</div>
+  </div>
 </section>
+
+<!-- RESOURCE PLANNING -->
 <section id="planning" class="panel">
-<div class="section-head"><div><h2>Resource planning</h2><div class="muted">Tune the score weighting and compare rankings.</div></div></div>
-<div class="card"><div class="weight"><label for="weight"><b>Target attainment weight</b></label><input id="weight" type="range" min="20" max="60" step="5" value="40"><b id="weightValue">40%</b></div><p class="muted">Conversion = 25%, customer satisfaction = 20%, follow-up compliance gets the remaining weight. Target attainment is capped and normalized for scoring.</p></div>
-<div class="card" style="margin-top:14px"><h3>Top-scoring employees</h3><div class="table-wrap"><table><thead><tr><th>Employee</th><th>Utilization</th><th>Target attainment</th><th>Score</th><th>Planning status</th></tr></thead><tbody id="topRows"></tbody></table></div></div>
-<div class="callout" style="margin-top:14px">Capacity flags are prompts for review, not automatic reassignment decisions. Check skills, territory, client relationship and open workload before moving a lead.</div>
+  <div class="section-head">
+    <div>
+      <h2>Resource planning</h2>
+      <div class="muted">Tune the score weighting and compare rankings.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="weight">
+      <label for="weight"><b>Target attainment weight</b></label>
+      <input id="weight" type="range" min="20" max="60" step="5" value="40">
+      <b id="weightValue">40%</b>
+    </div>
+    <p class="muted">
+      Conversion = 25%, customer satisfaction = 20%,
+      follow-up compliance gets the remaining weight.
+      Target attainment is capped and normalized for scoring.
+    </p>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h3>Top-scoring employees</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Utilization</th>
+            <th>Target attainment</th>
+            <th>Score</th>
+            <th>Planning status</th>
+          </tr>
+        </thead>
+        <tbody id="topRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px">
+    Capacity flags are prompts for review, not automatic reassignment decisions.
+    Check skills, territory, client relationship and open workload before moving a lead.
+  </div>
 </section>
+
+<!-- AGENTIC AI -->
 <section id="agent" class="panel">
-<div class="section-head"><div><h2>Agentic AI · Decision recommendations</h2><div class="muted">Transparent planning cycle: perceive → evaluate → plan → verify.</div></div><button class="btn primary" onclick="runAgent()">Run planning agent ↻</button></div>
-<div id="agentSteps" class="steps"></div><div id="recommendations" class="rec-list" style="margin-top:14px"></div>
-<div class="card" style="margin-top:14px"><h3>Guardrails</h3><ul class="muted" style="line-height:1.8"><li>Every recommendation shows the rule that triggered it.</li><li>Human approval is required before assignments or employment-related actions.</li><li>Client budget is potential opportunity value—not recognized revenue.</li><li>Do not use demo data to make real performance or HR decisions.</li></ul></div>
+  <div class="section-head">
+    <div>
+      <h2>Agentic AI · Decision recommendations</h2>
+      <div class="muted">Transparent planning cycle: perceive → evaluate → plan → verify.</div>
+    </div>
+    <button class="btn primary" onclick="runAgent()">Run planning agent ↻</button>
+  </div>
+
+  <div id="agentSteps" class="steps"></div>
+  <div id="recommendations" class="rec-list" style="margin-top:14px"></div>
+
+  <div class="card" style="margin-top:14px">
+    <h3>Guardrails</h3>
+    <ul class="muted" style="line-height:1.8">
+      <li>Every recommendation shows the rule that triggered it.</li>
+      <li>Human approval is required before assignments or employment-related actions.</li>
+      <li>Client budget is potential opportunity value—not recognized revenue.</li>
+      <li>Do not use demo data to make real performance or HR decisions.</li>
+    </ul>
+  </div>
 </section>
-<p class="foot">Demo only · Synthetic employee/client records · Rule-based backend · No company data or external LLM connected</p>
+
+<p class="foot">
+  Demo only · Synthetic employee/client records · Rule-based backend · No company data or external LLM connected
+</p>
+
 </main>
+
 <script>
-let employees=[], summary={}, selectedId=null, targetWeight=40;
-const money=n=>'₹'+(n/100000).toFixed(1)+'L';
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-async function api(url,opts){const r=await fetch(url,opts);if(!r.ok)throw new Error('API request failed: '+r.status);return r.json()}
-async function loadAll(){try{summary=await api('/api/summary?target_weight='+targetWeight);const data=await api('/api/employees?target_weight='+targetWeight+'&limit=100');employees=data.items;renderMetrics();renderEmployees();renderDistribution();renderTop();await runAgent()}catch(e){document.getElementById('metrics').innerHTML='<div class="card">Could not reach the backend. Start the app using the README instructions.</div>';console.error(e)}}
-function renderMetrics(){const cards=[['Sales employees',summary.employee_count,'Sample workforce'],['Average performance',summary.average_performance+'/100','Weighted performance score'],['Underutilized',summary.underutilized,'Below 70% capacity'],['Overutilized',summary.overutilized,'Above 100% capacity']];document.getElementById('metrics').innerHTML=cards.map(c=>`<div class="card"><div class="metric-label">${c[0]}</div><div class="metric">${c[1]}</div><div class="metric-note">${c[2]}</div></div>`).join('')}
-function renderDistribution(){const u=summary.underutilized,b=summary.balanced,o=summary.overutilized,total=summary.employee_count||1;document.getElementById('distribution').innerHTML=`<div class="bar"><span style="width:${u/total*100}%;background:#d99b35"></span><span style="width:${b/total*100}%;background:#329b78"></span><span style="width:${o/total*100}%;background:#d65b5b"></span></div><div class="legend"><span><i class="dot" style="background:#d99b35"></i>Under: ${u}</span><span><i class="dot" style="background:#329b78"></i>Balanced: ${b}</span><span><i class="dot" style="background:#d65b5b"></i>Over: ${o}</span></div>`;document.getElementById('summaryText').textContent=`${u} employees are below 70% utilization and ${o} exceed 100%. Review the people with spare capacity and those with workload pressure, then validate client fit before any reassignment.`}
-function renderEmployees(){const q=document.getElementById('search').value.trim().toLowerCase(),st=document.getElementById('status').value;const filtered=employees.filter(e=>(st==='All'||e.status===st)&&(e.name.toLowerCase().includes(q)||e.client.toLowerCase().includes(q)||String(e.id)===q));document.getElementById('matchCount').textContent=`Showing ${filtered.length} matching employees · Sorted by performance score`;document.getElementById('employeeRows').innerHTML=filtered.map(e=>`<tr class="${e.id===selectedId?'selected':''}" onclick="selectEmployee(${e.id})"><td><b>${esc(e.name)}</b><div class="muted">ID ${String(e.id).padStart(3,'0')}</div></td><td>${esc(e.client)}</td><td>${money(e.salary)}</td><td>${money(e.client_budget)}</td><td>${e.target_attainment}%</td><td>${e.utilization}%</td><td><b>${e.performance_score}/100</b></td><td><span class="pill ${e.status}">${e.status}</span></td></tr>`).join('')||'<tr><td colspan="8" class="empty">No matching employees.</td></tr>';if(selectedId&&filtered.some(e=>e.id===selectedId))renderDetail(employees.find(e=>e.id===selectedId));else if(filtered.length) {selectedId=filtered[0].id;renderDetail(filtered[0])}else document.getElementById('employeeDetail').innerHTML='<div class="muted">No employee matches the current filter.</div>'}
-function selectEmployee(id){selectedId=id;renderEmployees()}
-function renderDetail(e){document.getElementById('employeeDetail').innerHTML=`<h3>${esc(e.name)} <span class="pill ${e.status}">${e.status}</span></h3><div class="muted">${esc(e.role)} · ${esc(e.client)}</div><div class="detail-grid" style="margin-top:14px"><div class="mini"><small>Monthly salary</small><b>${money(e.salary)}</b></div><div class="mini"><small>Client budget</small><b>${money(e.client_budget)}</b></div><div class="mini"><small>Closed value proxy*</small><b>${money(e.closed_value)}</b></div><div class="mini"><small>Performance score</small><b>${e.performance_score}/100</b></div><div class="mini"><small>Target attainment</small><b>${e.target_attainment}%</b></div><div class="mini"><small>Conversion rate</small><b>${e.conversion_rate}%</b></div><div class="mini"><small>Customer satisfaction</small><b>${e.satisfaction}/5</b></div><div class="mini"><small>Follow-up compliance</small><b>${e.follow_up_compliance}%</b></div></div><p class="muted">*Illustrative derived value in synthetic data; replace with actual closed sales/revenue before business use.</p>`}
-function renderTop(){document.getElementById('weightValue').textContent=targetWeight+'%';document.getElementById('topRows').innerHTML=[...employees].sort((a,b)=>b.performance_score-a.performance_score).slice(0,10).map(e=>`<tr><td>${esc(e.name)}</td><td>${e.utilization}%</td><td>${e.target_attainment}%</td><td><b>${e.performance_score}/100</b></td><td><span class="pill ${e.status}">${e.status}</span></td></tr>`).join('')}
-async function runAgent(){try{const data=await api('/api/plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({target_weight:targetWeight})});document.getElementById('agentSteps').innerHTML=data.agent_steps.map(s=>`<div class="step"><b>${esc(s.step)}</b><p>${esc(s.detail)}</p></div>`).join('');document.getElementById('recommendations').innerHTML=data.recommendations.map(r=>`<article class="rec"><span class="priority ${esc(r.priority)}">${esc(r.priority)} priority</span><h3>${esc(r.title)}</h3><p>${esc(r.reason)}</p><p><b>Suggested next step:</b> ${esc(r.action)}</p><div class="rule"><b>Trigger rule</b><br>${esc(r.rule)}<br><br><b>Approval:</b> Required</div></article>`).join('')||'<div class="card">No recommendations triggered by current rules.</div>'}catch(e){document.getElementById('recommendations').innerHTML='<div class="card">Agent endpoint unavailable.</div>'}}
-function go(tab){document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===tab));if(tab==='agent')runAgent()}
-document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.tab)));
-document.getElementById('search').addEventListener('input',renderEmployees);document.getElementById('status').addEventListener('change',renderEmployees);
-document.getElementById('weight').addEventListener('input',async e=>{targetWeight=Number(e.target.value);document.getElementById('weightValue').textContent=targetWeight+'%';try{const data=await api('/api/employees?target_weight='+targetWeight+'&limit=100');employees=data.items;summary=await api('/api/summary?target_weight='+targetWeight);renderMetrics();renderEmployees();renderTop();renderDistribution();if(document.getElementById('agent').classList.contains('active'))runAgent()}catch(err){console.error(err)}});
+let employees = [];
+let summary = {};
+let selectedId = null;
+let targetWeight = 40;
+
+const money = n => '₹' + (n / 100000).toFixed(1) + 'L';
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+}[c]));
+
+async function api(url, opts) {
+  const r = await fetch(url, opts);
+  if (!r.ok) throw new Error('API request failed: ' + r.status);
+  return r.json();
+}
+
+async function loadAll() {
+  try {
+    summary = await api('/api/summary?target_weight=' + targetWeight);
+
+    const data = await api(
+      '/api/employees?target_weight=' + targetWeight + '&limit=100'
+    );
+
+    employees = data.items;
+
+    renderMetrics();
+    renderTopPerformers();
+    renderEmployees();
+    renderDistribution();
+    renderTop();
+
+    await runAgent();
+  } catch (e) {
+    document.getElementById('metrics').innerHTML =
+      '<div class="card">Could not reach the backend. Start the app using the README instructions.</div>';
+
+    document.getElementById('topPerformers').innerHTML =
+      '<div class="card">Could not load top performers. Check the backend connection.</div>';
+
+    console.error(e);
+  }
+}
+
+function renderMetrics() {
+  const cards = [
+    ['Sales employees', summary.employee_count, 'Sample workforce'],
+    ['Average performance', summary.average_performance + '/100', 'Weighted performance score'],
+    ['Underutilized', summary.underutilized, 'Below 70% capacity'],
+    ['Overutilized', summary.overutilized, 'Above 100% capacity']
+  ];
+
+  document.getElementById('metrics').innerHTML = cards.map(c => `
+    <div class="card">
+      <div class="metric-label">${c[0]}</div>
+      <div class="metric">${c[1]}</div>
+      <div class="metric-note">${c[2]}</div>
+    </div>
+  `).join('');
+}
+
+/* NEW: Render the three highest-scoring employees */
+function renderTopPerformers() {
+  const container = document.getElementById('topPerformers');
+
+  const topThree = [...employees]
+    .sort((a, b) =>
+      Number(b.performance_score) - Number(a.performance_score) ||
+      Number(a.id) - Number(b.id)
+    )
+    .slice(0, 3);
+
+  if (!topThree.length) {
+    container.innerHTML =
+      '<div class="card">No employee data available.</div>';
+    return;
+  }
+
+  container.innerHTML = topThree.map((e, index) => {
+    const score = Math.max(
+      0,
+      Math.min(100, Number(e.performance_score) || 0)
+    );
+
+    return `
+      <article class="performer-card">
+        <div class="performer-head">
+          <div class="performer-rank ${index === 0 ? 'first' : ''}">
+            #${index + 1}
+          </div>
+
+          <div>
+            <div class="performer-name">${esc(e.name)}</div>
+            <div class="performer-client">${esc(e.client)}</div>
+          </div>
+        </div>
+
+        <div class="performer-score">
+          ${esc(e.performance_score)}<span style="font-size:14px;color:#69758b"> / 100</span>
+        </div>
+
+        <div class="performer-score-label">Performance score</div>
+
+        <div class="performer-track">
+          <div class="performer-fill" style="width:${score}%"></div>
+        </div>
+
+        <div class="performer-utilization">
+          <span>Utilization</span>
+          <b>${esc(e.utilization)}%</b>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderDistribution() {
+  const u = summary.underutilized;
+  const b = summary.balanced;
+  const o = summary.overutilized;
+  const total = summary.employee_count || 1;
+
+  document.getElementById('distribution').innerHTML = `
+    <div class="bar">
+      <span style="width:${u / total * 100}%;background:#d99b35"></span>
+      <span style="width:${b / total * 100}%;background:#329b78"></span>
+      <span style="width:${o / total * 100}%;background:#d65b5b"></span>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot" style="background:#d99b35"></i>Under: ${u}</span>
+      <span><i class="dot" style="background:#329b78"></i>Balanced: ${b}</span>
+      <span><i class="dot" style="background:#d65b5b"></i>Over: ${o}</span>
+    </div>
+  `;
+
+  document.getElementById('summaryText').textContent =
+    `${u} employees are below 70% utilization and ${o} exceed 100%. Review the people with spare capacity and those with workload pressure, then validate client fit before any reassignment.`;
+}
+
+function renderEmployees() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const st = document.getElementById('status').value;
+
+  const filtered = employees.filter(e =>
+    (st === 'All' || e.status === st) &&
+    (
+      e.name.toLowerCase().includes(q) ||
+      e.client.toLowerCase().includes(q) ||
+      String(e.id) === q
+    )
+  );
+
+  document.getElementById('matchCount').textContent =
+    `Showing ${filtered.length} matching employees · Sorted by performance score`;
+
+  document.getElementById('employeeRows').innerHTML =
+    filtered.map(e => `
+      <tr class="${e.id === selectedId ? 'selected' : ''}" onclick="selectEmployee(${e.id})">
+        <td>
+          <b>${esc(e.name)}</b>
+          <div class="muted">ID ${String(e.id).padStart(3, '0')}</div>
+        </td>
+        <td>${esc(e.client)}</td>
+        <td>${money(e.salary)}</td>
+        <td>${money(e.client_budget)}</td>
+        <td>${e.target_attainment}%</td>
+        <td>${e.utilization}%</td>
+        <td><b>${e.performance_score}/100</b></td>
+        <td><span class="pill ${e.status}">${e.status}</span></td>
+      </tr>
+    `).join('') ||
+    '<tr><td colspan="8" class="empty">No matching employees.</td></tr>';
+
+  if (selectedId && filtered.some(e => e.id === selectedId)) {
+    renderDetail(employees.find(e => e.id === selectedId));
+  } else if (filtered.length) {
+    selectedId = filtered[0].id;
+    renderDetail(filtered[0]);
+  } else {
+    document.getElementById('employeeDetail').innerHTML =
+      '<div class="muted">No employee matches the current filter.</div>';
+  }
+}
+
+function selectEmployee(id) {
+  selectedId = id;
+  renderEmployees();
+}
+
+function renderDetail(e) {
+  document.getElementById('employeeDetail').innerHTML = `
+    <h3>
+      ${esc(e.name)}
+      <span class="pill ${e.status}">${e.status}</span>
+    </h3>
+
+    <div class="muted">${esc(e.role)} · ${esc(e.client)}</div>
+
+    <div class="detail-grid" style="margin-top:14px">
+      <div class="mini"><small>Monthly salary</small><b>${money(e.salary)}</b></div>
+      <div class="mini"><small>Client budget</small><b>${money(e.client_budget)}</b></div>
+      <div class="mini"><small>Closed value proxy*</small><b>${money(e.closed_value)}</b></div>
+      <div class="mini"><small>Performance score</small><b>${e.performance_score}/100</b></div>
+      <div class="mini"><small>Target attainment</small><b>${e.target_attainment}%</b></div>
+      <div class="mini"><small>Conversion rate</small><b>${e.conversion_rate}%</b></div>
+      <div class="mini"><small>Customer satisfaction</small><b>${e.satisfaction}/5</b></div>
+      <div class="mini"><small>Follow-up compliance</small><b>${e.follow_up_compliance}%</b></div>
+    </div>
+
+    <p class="muted">
+      *Illustrative derived value in synthetic data; replace with actual closed sales/revenue before business use.
+    </p>
+  `;
+}
+
+function renderTop() {
+  document.getElementById('weightValue').textContent = targetWeight + '%';
+
+  document.getElementById('topRows').innerHTML =
+    [...employees]
+      .sort((a, b) => b.performance_score - a.performance_score)
+      .slice(0, 10)
+      .map(e => `
+        <tr>
+          <td>${esc(e.name)}</td>
+          <td>${e.utilization}%</td>
+          <td>${e.target_attainment}%</td>
+          <td><b>${e.performance_score}/100</b></td>
+          <td><span class="pill ${e.status}">${e.status}</span></td>
+        </tr>
+      `).join('');
+}
+
+async function runAgent() {
+  try {
+    const data = await api('/api/plan', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ target_weight: targetWeight })
+    });
+
+    document.getElementById('agentSteps').innerHTML =
+      data.agent_steps.map(s => `
+        <div class="step">
+          <b>${esc(s.step)}</b>
+          <p>${esc(s.detail)}</p>
+        </div>
+      `).join('');
+
+    document.getElementById('recommendations').innerHTML =
+      data.recommendations.map(r => `
+        <article class="rec">
+          <span class="priority ${esc(r.priority)}">${esc(r.priority)} priority</span>
+          <h3>${esc(r.title)}</h3>
+          <p>${esc(r.reason)}</p>
+          <p><b>Suggested next step:</b> ${esc(r.action)}</p>
+          <div class="rule">
+            <b>Trigger rule</b><br>
+            ${esc(r.rule)}<br><br>
+            <b>Approval:</b> Required
+          </div>
+        </article>
+      `).join('') ||
+      '<div class="card">No recommendations triggered by current rules.</div>';
+
+  } catch (e) {
+    document.getElementById('recommendations').innerHTML =
+      '<div class="card">Agent endpoint unavailable.</div>';
+
+    console.error(e);
+  }
+}
+
+function go(tab) {
+  document.querySelectorAll('.nav button').forEach(b =>
+    b.classList.toggle('active', b.dataset.tab === tab)
+  );
+
+  document.querySelectorAll('.panel').forEach(p =>
+    p.classList.toggle('active', p.id === tab)
+  );
+
+  if (tab === 'agent') runAgent();
+}
+
+document.querySelectorAll('.nav button').forEach(b =>
+  b.addEventListener('click', () => go(b.dataset.tab))
+);
+
+document.getElementById('search').addEventListener('input', renderEmployees);
+document.getElementById('status').addEventListener('change', renderEmployees);
+
+document.getElementById('weight').addEventListener('input', async e => {
+  targetWeight = Number(e.target.value);
+
+  document.getElementById('weightValue').textContent = targetWeight + '%';
+
+  try {
+    const data = await api(
+      '/api/employees?target_weight=' + targetWeight + '&limit=100'
+    );
+
+    employees = data.items;
+
+    summary = await api('/api/summary?target_weight=' + targetWeight);
+
+    renderMetrics();
+    renderTopPerformers();
+    renderEmployees();
+    renderTop();
+    renderDistribution();
+
+    if (document.getElementById('agent').classList.contains('active')) {
+      runAgent();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 loadAll();
 </script>
-</body></html>
+</body>
+</html>
